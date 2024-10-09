@@ -193,12 +193,13 @@ for epoch in range(num_epochs):
         loss = criterion(output, target)
 
         # Back prop
+        # Computes the gradients of the loss with respect to the model parameters using backpropagation.
         loss.backward()
 
         # Clip to avoid exploding gradient issues, makes sure grads are
         # within a healthy range
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1)
 
-        # Gradient descent step
+        # Gradient descent step, update the parameters
         optimizer.step()
 
