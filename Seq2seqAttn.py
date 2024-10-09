@@ -67,7 +67,7 @@ class Encoder(nn.Module):
 
         # Use forward, backward cells and hidden through a linear layer
         # so that it can be input to the decoder which is not bidirectional
-        # Also using index slicing ([idx:idx+1]) to keep the dimension
+        # Shape after concatenation=(1,batch_size(N), hidden*2)
         hidden = self.fc_hidden(torch.cat((hidden[0:1], hidden[1:2]), dim=2))
         cell = self.fc_cell(torch.cat((cell[0:1], cell[1:2]), dim=2))
 
@@ -82,7 +82,9 @@ class Decoder(nn.Module):
 
         self.embedding = nn.Embedding(input_size, embedding_size)
         self.rnn = nn.LSTM(hidden_size * 2 + embedding_size, hidden_size, num_layers)
+        # Concatenation of the embedding of the current input word and the context vector from the attention mechanism.
 
+        # The attention energy score is computed by combining the current hidden state (from the decoder) and the encoder's hidden states. 
         self.energy = nn.Linear(hidden_size * 3, 1)
         self.fc = nn.Linear(hidden_size, output_size)
         self.dropout = nn.Dropout(p)
