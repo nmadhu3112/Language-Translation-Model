@@ -63,6 +63,7 @@ class Encoder(nn.Module):
 
         encoder_states, (hidden, cell) = self.rnn(embedding)
         # outputs shape: (seq_length, N, hidden_size*2)
+        # hidden and cell shape: (2, N, hidden_size)
 
         # Use forward, backward cells and hidden through a linear layer
         # so that it can be input to the decoder which is not bidirectional
