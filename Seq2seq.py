@@ -99,7 +99,8 @@ class Seq2Seq(nn.Module):
         target_vocab_size = len(english.vocab)
 
         outputs = torch.zeros(target_len, batch_size, target_vocab_size).to(device)
-
+        # to store the probability distribution of each of the words in the batch of sentence
+        
         hidden, cell = self.encoder(source)
 
         # Grab the first input to the Decoder which will be <SOS> token
