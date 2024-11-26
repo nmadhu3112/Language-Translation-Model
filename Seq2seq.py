@@ -66,6 +66,7 @@ class Decoder(nn.Module):
         self.dropout = nn.Dropout(p)
         self.hidden_size = hidden_size
         self.num_layers = num_layers
+        self.embedding_size = embedding_size
 
         self.embedding = nn.Embedding(input_size, embedding_size)
         self.rnn = nn.LSTM(embedding_size, hidden_size, num_layers, dropout=p)
