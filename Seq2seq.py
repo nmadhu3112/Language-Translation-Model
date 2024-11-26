@@ -48,6 +48,7 @@ class Encoder(nn.Module):
     def __init__(input_dim, embedding_dim,hidden_size,dropout):
         super(Encoder,self).__init__()
         self.dropout = nn.Dropout(p)
+        self.embedding_dim = embedding_dim
         self.hidden_size = hidden_size
         self.num_layers = num_layers
         self.embedding = nn.Embedding(input_dim, embedding_dim)
